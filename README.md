@@ -1,97 +1,59 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Intern Assignment
 
-# Getting Started
+A production-ready React Native application displaying a large list of users fetched from the RandomUser API. It features search functionality, infinite scrolling, robust state management with Redux Toolkit, and local data persistence.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🚀 App Functionality
 
-## Step 1: Start Metro
+- **User Directory**: Browse a paginated list of users fetched from a public API.
+- **Search**: Locally filter users by name or email instantly (with debouncing).
+- **Infinite Scrolling**: Automatically fetches the next page of users when scrolling to the bottom.
+- **User Details**: View comprehensive contact and address details of selected users on a separate screen.
+- **Data Persistence**: Uses `redux-persist` and `AsyncStorage` to ensure the user list is restored when the app is restarted.
+- **Lifecycle Management**: Tracks when the app goes into the background or comes to the foreground.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🛠️ Key Technical Decisions
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+1. **React Native CLI**: Bootstrapped without Expo to fulfill the assignment requirement and allow for full native control.
+2. **TypeScript**: Strongly typed for better developer experience and preventing runtime errors.
+3. **Redux Toolkit**: Centralized state management for the user list, loading status, pagination, and error handling. It avoids prop-drilling and enables easy caching.
+4. **Local Data Persistence**: We cache only the `users` array so that on app restart, the user instantly sees previously loaded data while the app fetches new ones in the background if needed.
+5. **Debounced Search**: Instead of immediately filtering on every keystroke, a `300ms` debounce is implemented to ensure UI performance is smooth.
+6. **Memoization**: Used `React.memo` for `UserCard` and `useMemo`/`useCallback` in `HomeScreen` to optimize FlatList rendering performance.
+7. **No Third-Party UI Libs**: Kept the UI lightweight by strictly using core components (`View`, `Text`, `FlatList`, `TextInput`, `StyleSheet`).
 
-```sh
-# Using npm
-npm start
+## 🔮 Improvements (With More Time)
 
-# OR using Yarn
-yarn start
-```
+- **Network Resilience**: Add NetInfo to handle offline scenarios gracefully and display a "No Internet Connection" banner.
+- **Unit Testing**: Add Jest and React Native Testing Library to write tests for Redux thunks, reducers, and core UI components.
+- **Advanced Caching**: Implement `RTK Query` instead of raw thunks for out-of-the-box caching, deduplication, and polling.
+- **Skeleton Loaders**: Replace the basic `ActivityIndicator` with skeleton placeholders for a more modern loading experience.
+- **Pull-to-Refresh**: Implement `RefreshControl` in the FlatList to allow users to manually reload the list from page 1.
+- **E2E Testing**: Add Detox or Maestro for end-to-end testing of user flows.
 
-## Step 2: Build and run your app
+## 🏃 How to Run the Project
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Prerequisites
+- Node.js (v18+)
+- Java Development Kit (JDK 17)
+- Android Studio / Xcode
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd RNInternAssignment
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the app:
+   - **Android**:
+     ```bash
+     npm run android
+     ```
+   - **iOS**:
+     ```bash
+     cd ios && pod install && cd ..
+     npm run ios
+     ```
