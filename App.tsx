@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
 
 import { store, persistor } from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
@@ -14,7 +14,7 @@ import { useAppLifecycle } from './src/hooks/useAppLifecycle';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const LoadingMarkup = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={styles.loadingContainer}>
     <ActivityIndicator size="large" color="#0000ff" />
   </View>
 );
@@ -60,3 +60,11 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

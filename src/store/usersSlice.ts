@@ -47,7 +47,7 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state, action) => {
+      .addCase(fetchUsers.pending, (state) => {
         // If it's the first page, we might want a full screen loader, but we keep it simple here
         state.loading = true;
         state.error = null;
